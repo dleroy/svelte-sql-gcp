@@ -32,7 +32,7 @@ jobs:
    # - name: Authenticate
  #     uses: 'google-github-actions/auth@v2'
   #    with:
- 3       credentials_json: ${{ secrets.GCP_SA_KEY }}
+ #       credentials_json: ${{ secrets.GCP_SA_KEY }}
 
     # Step 2: Setup Google Cloud SDK
   #  - name: Set up Google Cloud SDK
