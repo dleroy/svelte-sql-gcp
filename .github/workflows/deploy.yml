@@ -25,6 +25,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Save Google Cloud credentials
+      run: |
+        echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > $HOME/gcloud.json
+
+    - name: Set GOOGLE_APPLICATION_CREDENTIALS
+      run: |
+        export GOOGLE_APPLICATION_CREDENTIALS="$HOME/gcloud.json"
+    
+    - name: Authenticate gcloud
+      run: |
+        gcloud auth activate-service-account --key-file=$HOME/gcloud.json
+        
    # Create the service account key file
     #- name: Create GCP credentials file
     #  run: echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > $HOME/gcloud.json
