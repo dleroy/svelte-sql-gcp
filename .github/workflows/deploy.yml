@@ -24,10 +24,12 @@ jobs:
 
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Authenticate with docker
+      run: gcloud auth configure-docker gcr.io
       
     - name: Build image
-      run: |
-        'gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp'
+      run: gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp
 
 
     # Step 4: Deploy to Cloud Run
