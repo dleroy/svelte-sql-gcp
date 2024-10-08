@@ -27,7 +27,7 @@ jobs:
 
     - name: Save Google Cloud credentials
       run: |
-        echo "${{ secrets.GCP_SA_KEY }}" > $HOME/gcloud.json
+        echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > $HOME/gcloud.json
 
     - name: Set GOOGLE_APPLICATION_CREDENTIALS
       run: |
