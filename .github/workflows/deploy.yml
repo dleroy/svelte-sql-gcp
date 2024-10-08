@@ -25,6 +25,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+   # Create the service account key file
+    - name: Create GCP credentials file
+      run: echo "${{ secrets.GCP_SA_KEY }}" > $HOME/gcloud.json
+
+    # Authenticate using the newly created service account key file
+    - name: Authenticate to Google Cloud
+      run: gcloud auth activate-service-account --key-file=$HOME/gcloud.json
+      
     - name: Authenticate with docker
       run: gcloud auth configure-docker gcr.io
       
