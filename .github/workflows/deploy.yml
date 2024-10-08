@@ -27,7 +27,7 @@ jobs:
 
     - name: Save Google Cloud credentials
       run: |
-        echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > $HOME/gcloud.json
+        echo "${{ secrets.GCP_SA_KEY }}" > $HOME/gcloud.json
 
     - name: Set GOOGLE_APPLICATION_CREDENTIALS
       run: |
@@ -50,7 +50,7 @@ jobs:
 
     - name: Verify credential file exists
       run: |
-        ls -lR $HOME
+        ls -l $HOME/gcloud.json
         
     - name: Build image
       run: gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp
