@@ -39,7 +39,7 @@ jobs:
         
    # Create the service account key file
     #- name: Create GCP credentials file
-    #  run: echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > $HOME/gcloud.json
+    #  run: echo "${{ secrets.GCP_SA_KEY }}"  > $HOME/gcloud.json
 
     # Authenticate using the newly created service account key file
     #- name: Authenticate to Google Cloud
