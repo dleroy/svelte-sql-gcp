@@ -27,7 +27,7 @@ jobs:
       
     - name: Build image
       run: |
-        gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/svelte-sql-gcp
+        'gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp'
 
 
     # Step 4: Deploy to Cloud Run
