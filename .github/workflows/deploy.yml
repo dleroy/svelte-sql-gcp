@@ -38,7 +38,7 @@ jobs:
 
     - name: Verify credential file exists
       run: |
-        ls -l $HOME
+        ls -lR $HOME
         
     - name: Build image
       run: gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp
