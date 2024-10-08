@@ -32,6 +32,14 @@ jobs:
     - name: Set GOOGLE_APPLICATION_CREDENTIALS
       run: |
         export GOOGLE_APPLICATION_CREDENTIALS="$HOME/gcloud.json"
+
+    - name: Verify credential file exists
+      run: |
+        ls -l $HOME/gcloud.json
+
+    - name: Verify contents of credentials
+      run: |
+        more $HOME/gcloud.json
     
     - name: Authenticate gcloud
       run: |
