@@ -12,7 +12,7 @@ jobs:
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
       with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+        credentials_json: '${{ secrets.GCP_SA_KEY_JSON }}'
 
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v2'
@@ -27,7 +27,7 @@ jobs:
 
     - name: Save Google Cloud credentials
       run: |
-        echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > $HOME/gcloud.json
+        echo "${{ secrets.GCP_SA_KEY_BASE64 }}"  > $HOME/gcloud.json
 
     - name: Set GOOGLE_APPLICATION_CREDENTIALS
       run: |
