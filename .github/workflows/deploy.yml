@@ -24,5 +24,6 @@ jobs:
           create_credentials_file: true
           workload_identity_provider: 'projects/569757135820/locations/global/workloadIdentityPools/1000/providers/1000'
           service_account: 'github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com'
+          audience: 'https://iam.googleapis.com/projects/569757135820/locations/global/workloadIdentityPools/1000/providers/1000'
           
 
