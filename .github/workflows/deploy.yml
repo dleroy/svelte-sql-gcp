@@ -28,5 +28,8 @@ jobs:
 
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
+
+      - name: Build image
+        run: gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp
           
 
