@@ -6,74 +6,23 @@ on:
       - main
 
 jobs:
-  job_id:
+  build:
+    # Allow the job to fetch a GitHub ID token
+    permissions:
+      id-token: write
+      contents: read
+
     runs-on: ubuntu-latest
+
     steps:
-    #- id: 'auth'
-    #  uses: 'google-github-actions/auth@v2'
-    #  with:
-    #    credentials_json: '${{ secrets.GCP_SA_KEY_BASE64 }}'
-    - name: Auth
-      run: |
-        echo "${{ secrets.GCP_SA_KEY_BASE64 }}" | base64 --decode | jq > $HOME/gcloud.json
-        gcloud auth activate-service-account --key-file=$HOME/gcloud.json
-        
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v2'
-      with:
-        project_id: '${{ secrets.GCP_PROJECT_ID}}'
+      - uses: actions/checkout@v4
 
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          create_credentials_file: true
+          workload_identity_provider: 'projects/569757135820/locations/global/workloadIdentityPools/1000/providers/1000'
+          service_account: 'github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com'
+          
 
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Save Google Cloud credentials
-      run: |
-        echo "${{ secrets.GCP_SA_KEY_BASE64 }}"  > $HOME/gcloud.json
-
-    - name: Set GOOGLE_APPLICATION_CREDENTIALS
-      run: |
-        export GOOGLE_APPLICATION_CREDENTIALS="$HOME/gcloud.json"
-
-    - name: Verify credential file exists
-      run: |
-        ls -l $HOME/gcloud.json
-
-    - name: Verify contents of credentials
-      run: |
-        more $HOME/gcloud.json
-    
-    - name: Authenticate gcloud
-      run: |
-        gcloud auth activate-service-account --key-file=$HOME/gcloud.json
-        
-   # Create the service account key file
-    #- name: Create GCP credentials file
-    #  run: echo "${{ secrets.GCP_SA_KEY }}"  > $HOME/gcloud.json
-
-    # Authenticate using the newly created service account key file
-    #- name: Authenticate to Google Cloud
-    #  run: gcloud auth activate-service-account --key-file=$HOME/gcloud.json
-      
-    #- name: Authenticate with docker
-    #  run: gcloud auth configure-docker gcr.io
-
-    - name: Verify credential file exists
-      run: |
-        ls -l $HOME/gcloud.json
-        
-    - name: Build image
-      run: gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp
-
-
-    # Step 4: Deploy to Cloud Run
-#    - name: Deploy to Cloud Run
-#      run: |
-#        gcloud run deploy daves-sveltekit-app \
-#          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/svelte-sql-gcp \
-#          --platform managed \
- #         --region ${{ secrets.GCP_REGION }} \
- #         --allow-unauthenticated \
- #         --add-cloudsql-instances ${{ secrets.GCP_PROJECT_ID }}:${{ secrets.GCP_REGION }}:svelte-test
