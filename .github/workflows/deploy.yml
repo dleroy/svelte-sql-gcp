@@ -26,6 +26,12 @@ jobs:
           service_account: 'github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com'
           audience: 'https://iam.googleapis.com/projects/569757135820/locations/global/workloadIdentityPools/github/providers/github-provider'
 
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          install_components: 'cloud-build'  # Install any needed gcloud components (cloud-build in this case)
+
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
 
