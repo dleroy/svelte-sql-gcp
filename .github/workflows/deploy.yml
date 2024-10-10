@@ -28,6 +28,6 @@ jobs:
 
       - name: Build image
         run: gcloud builds submit --tag gcr.io/deep-voyage-436902-b3/svelte-sql-gcp \
-          service_account: 'github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com'
+          --service_account='github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com'
           
 
