@@ -74,8 +74,6 @@ jobs:
         run: |-
           echo "${{ secrets.GCP_SA_KEY_JSON }}" > $HOME/gcloud-service-key.json
           gcloud auth activate-service-account --key-file=$HOME/gcloud-service-key.json
-        outputs:
-          credentials_file_path: $HOME/gcloud-service-key.json
 
       # BEGIN - Docker auth and build
       #
