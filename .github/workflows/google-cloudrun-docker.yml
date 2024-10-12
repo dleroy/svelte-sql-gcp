@@ -66,7 +66,7 @@ jobs:
 
       - name: 'Set account'
         run: |-
-          gcloud config set account github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com
+          gcloud auth activate-service-account --key-file="/home/runner/work/svelte-sql-gcp/svelte-sql-gcp/gha-creds-5ce59ad2583c9059.json"
 
       # BEGIN - Docker auth and build
       #
