@@ -68,7 +68,7 @@ jobs:
       # If you already have a container image, you can omit these steps.
       - name: 'Docker Auth'
         run: |
-          gcloud auth configure-docker
+          gcloud auth configure-docker "${{ env.GAR_LOCATION }}-docker.pkg.dev"
           
       - name: 'Build and Push Container'
         run: |-
