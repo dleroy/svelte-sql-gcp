@@ -64,6 +64,10 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY_JSON }}'
 
+      - name: 'Set account'
+        run |-
+          gcloud config set account github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com
+
       # BEGIN - Docker auth and build
       #
       # If you already have a container image, you can omit these steps.
