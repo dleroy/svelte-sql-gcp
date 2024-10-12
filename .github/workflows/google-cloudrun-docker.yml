@@ -40,7 +40,7 @@ env:
   REGION: 'us-central1'
   SERVICE: 'github-actions-build-deploy'
   GAR_LOCATION: 'us-central1'
-  GAR_NAME: 'gcr.io'
+  GAR_NAME: 'jobcamp'
 
 jobs:
   deploy:
