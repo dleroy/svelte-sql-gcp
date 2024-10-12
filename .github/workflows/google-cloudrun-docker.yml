@@ -38,7 +38,7 @@ on:
 env:
   PROJECT_ID: 'deep-voyage-436902-b3' 
   REGION: 'us-central1'
-  SERVICE: 'github-actions-build-deploy@deep-voyage-436902-b3.iam.gserviceaccount.com'
+  SERVICE: 'github-actions-build-deploy'
   GAR_LOCATION: 'us-central1'
   GAR_NAME: 'gcr.io'
 
@@ -80,15 +80,15 @@ jobs:
 
         # END - Docker auth and build
 
-        uses: 'google-github-actions/deploy-cloudrun@v2'
-        with:
-          service: '${{ env.SERVICE }}'
-          region: '${{ env.REGION }}'
+        #uses: 'google-github-actions/deploy-cloudrun@v2'
+        #with:
+          #service: '${{ env.SERVICE }}'
+          #region: '${{ env.REGION }}'
           # NOTE: If using a pre-built image, update the image name below:
 
-          image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}'
+          #image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}'
       # If required, use the Cloud Run URL output in later steps
-      - name: 'Show output'
-        run: |2-
+      #- name: 'Show output'
+        #run: |2-
 
-          echo ${{ steps.deploy.outputs.url }}
+          #echo ${{ steps.deploy.outputs.url }}
