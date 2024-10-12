@@ -54,6 +54,12 @@ jobs:
       - name: 'Checkout'
         uses: 'actions/checkout@v4'
 
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: deep-voyage-436902-b3
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          
       # Configure credential auth json
       #
       # See https://github.com/google-github-actions/auth for more options,
@@ -66,7 +72,10 @@ jobs:
 
       - name: 'Set account'
         run: |-
-          gcloud auth activate-service-account --key-file="$credentials_file_path"
+          echo "${{ secrets.GCP_SA_KEY_JSON }}" > $HOME/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file=$HOME/gcloud-service-key.json
+        outputs:
+          credentials_file_path: $HOME/gcloud-service-key.json
 
       # BEGIN - Docker auth and build
       #
