@@ -32,13 +32,12 @@ name: 'Build and Deploy to Cloud Run'
 on:
   push:
     branches:
-      - '"main"'
+      - main
 
 env:
-  PROJECT_ID: 'my-project' # TODO: update to your Google Cloud project ID
-  REGION: 'us-central1' # TODO: update to your region
-  SERVICE: 'my-service' # TODO: update to your service name
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: update to your workload identity provider
+  PROJECT_ID: 'deep-voyage-436902-bt' 
+  REGION: 'us-central1'
+  SERVICE: 'github-actions-jobcamp' 
 
 jobs:
   deploy:
@@ -50,7 +49,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # actions/checkout@v4
+        uses: 'actions/checkout@v4'
 
       # Configure Workload Identity Federation and generate an access token.
       #
@@ -58,19 +57,19 @@ jobs:
       # including authenticating via a JSON credentials file.
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2' # google-github-actions/auth@v2
+        uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
+          credentials_json: '${{ secrets.GCP_CREDENTIALS_JSON }}'
 
       # BEGIN - Docker auth and build
       #
       # If you already have a container image, you can omit these steps.
       - name: 'Docker Auth'
-        uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # docker/login-action@v3
+        uses: 'docker/login-action@v3'
         with:
-          username: 'oauth2accesstoken'
-          password: '${{ steps.auth.outputs.auth_token }}'
           registry: '${{ env.REGION }}-docker.pkg.dev'
+          username: _json_key
+          password: ${{ secrets.GCP_CREDENTIALS_JSON }}
 
       - name: 'Build and Push Container'
         run: |-
