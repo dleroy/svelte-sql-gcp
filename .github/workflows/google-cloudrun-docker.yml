@@ -70,14 +70,14 @@ jobs:
           DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/jobcamp-image:${{ github.sha }}"
           docker build --tag "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
+          
       - name: 'Deploy to Cloud Run'
-
         uses: 'google-github-actions/deploy-cloudrun@v2'
         with:
           service: '${{ env.SERVICE }}'
           region: '${{ env.REGION }}'
           image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/jobcamp-image:${{ github.sha }}'
-          env_vars: 'DATABASE_URL="mysql://dleroy:Chestnw3gard!@sveltedemo?host=/cloudsql/deep-voyage-436902-b3:us-central1:svelte-test"'
+          env_vars: 'DATABASE_URL=${{ secrets.GCP_DATABASE_URL }}'
           flags: '--add-cloudsql-instances=deep-voyage-436902-b3:us-central1:svelte-test'
           
       #- name: 'Allow unauthenticated access'
