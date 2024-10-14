@@ -35,7 +35,7 @@ on:
       - main
 
 env:
-  PROJECT_ID: 'deep-voyage-436902-bt' 
+  PROJECT_ID: 'deep-voyage-436902-b3' 
   REGION: 'us-central1'
   SERVICE: 'github-actions-jobcamp' 
   ARTIFACT_REPO: 'jobcamp'
