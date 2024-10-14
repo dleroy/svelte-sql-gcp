@@ -77,14 +77,14 @@ jobs:
           service: '${{ env.SERVICE }}'
           region: '${{ env.REGION }}'
           image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/jobcamp-image:${{ github.sha }}'
-          env_vars: DATABASE_URL="mysql://dleroy:Chestnw3gard!@sveltedemo?host=/cloudsql/deep-voyage-436902-b3:us-central1:svelte-test"
+          env_vars: 'DATABASE_URL="mysql://dleroy:Chestnw3gard!@sveltedemo?host=/cloudsql/deep-voyage-436902-b3:us-central1:svelte-test"'
           flags: '--add-cloudsql-instances=deep-voyage-436902-b3:us-central1:svelte-test'
           
-      - name: 'Allow unauthenticated access'
-        run: |-
-          gcloud run services add-iam-policy-binding ${{ env.SERVICE }} \
-            --region ${{ env.REGION }} \
-            --member="allUsers" \
-            --role="roles/run.invoker" \
-            --project=${{ env.PROJECT_ID }}
+      #- name: 'Allow unauthenticated access'
+      #  run: |-
+      #    gcloud run services add-iam-policy-binding ${{ env.SERVICE }} \
+      #      --region ${{ env.REGION }} \
+      #      --member="allUsers" \
+      #      --role="roles/run.invoker" \
+      #      --project=${{ env.PROJECT_ID }}
 
