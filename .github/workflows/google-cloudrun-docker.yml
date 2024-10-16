@@ -78,7 +78,7 @@ jobs:
           region: '${{ env.REGION }}'
           image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/jobcamp-image:${{ github.sha }}'
           env_vars: 'DATABASE_URL=${{ secrets.GCP_DATABASE_URL }}'
-          flags: '--add-cloudsql-instances=deep-voyage-436902-b3:us-central1:svelte-test'
+          flags: '--add-cloudsql-instances=deep-voyage-436902-b3:us-central1:svelte-test --allow-unauthenticated'
           
 
 
